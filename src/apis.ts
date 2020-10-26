@@ -55,4 +55,5 @@ export function initQywxApi (taro) {
   processApis(taro)
   taro.qy.version = wx.qy.version
   taro.qy.isWxLoginSupport = wx.qy.isWxLoginSupport
+  taro.env = wx.env
 }
