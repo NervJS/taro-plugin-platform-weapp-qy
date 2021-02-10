@@ -1,10 +1,10 @@
-import { noPromiseApis, otherApis } from './apis-list'
+import { noPromiseApis, needPromiseApis } from './apis-list'
 
 declare const wx: any
 
 function processApis (taro) {
   taro.qy = {}
-  const apis = [...noPromiseApis, ...otherApis]
+  const apis = [...noPromiseApis, ...needPromiseApis]
 
   apis.forEach(key => {
     if (!(key in wx.qy)) {
@@ -14,7 +14,7 @@ function processApis (taro) {
       return
     }
 
-    if (otherApis.has(key)) {
+    if (needPromiseApis.has(key)) {
       taro.qy[key] = (options, ...args) => {
         options = options || {}
         const obj = Object.assign({}, options)
@@ -55,5 +55,4 @@ export function initQywxApi (taro) {
   processApis(taro)
   taro.qy.version = wx.qy.version
   taro.qy.isWxLoginSupport = wx.qy.isWxLoginSupport
-  taro.env = wx.env
 }

@@ -2,7 +2,7 @@ export const noPromiseApis = new Set([
   'canIUse'
 ])
 
-export const otherApis = new Set([
+export const needPromiseApis = new Set([
   'login',
   'checkSession',
   'getEnterpriseUserInfo',
