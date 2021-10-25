@@ -1,19 +1,11 @@
-import { noPromiseApis, needPromiseApis } from './apis-list'
+import { needPromiseApis } from './apis-list'
 
 declare const wx: any
 
 function processApis (taro) {
   taro.qy = {}
-  const apis = [...noPromiseApis, ...needPromiseApis]
 
-  apis.forEach(key => {
-    if (!(key in wx.qy)) {
-      taro.qy[key] = () => {
-        console.warn(`企业微信小程序暂不支持 ${key}`)
-      }
-      return
-    }
-
+  Object.keys(wx.qy).forEach(key => {
     if (needPromiseApis.has(key)) {
       taro.qy[key] = (options, ...args) => {
         options = options || {}
@@ -25,7 +17,7 @@ function processApis (taro) {
           return wx.qy[key](options)
         }
 
-        const p: any = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           ['fail', 'success', 'complete'].forEach((k) => {
             obj[k] = (res) => {
               options[k] && options[k](res)
@@ -42,10 +34,14 @@ function processApis (taro) {
             wx.qy[key](obj)
           }
         })
-        return p
       }
     } else {
-      taro.qy[key] = (...args) => wx.qy[key].apply(wx, args)
+      const target = wx.qy[key]
+      if (typeof target === 'function') {
+        taro.qy[key] = (...args) => target.apply(wx.qy, args)
+      } else {
+        taro.qy[key] = target
+      }
     }
   })
 }
@@ -53,6 +49,4 @@ function processApis (taro) {
 
 export function initQywxApi (taro) {
   processApis(taro)
-  taro.qy.version = wx.qy.version
-  taro.qy.isWxLoginSupport = wx.qy.isWxLoginSupport
 }

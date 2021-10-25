@@ -1,7 +1,3 @@
-export const noPromiseApis = new Set([
-  'canIUse'
-])
-
 export const needPromiseApis = new Set([
   'login',
   'checkSession',
