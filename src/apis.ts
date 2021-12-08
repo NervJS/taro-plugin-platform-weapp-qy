@@ -5,7 +5,7 @@ declare const wx: any
 function processApis (taro) {
   taro.qy = {}
 
-  Object.keys(wx.qy).forEach(key => {
+  Object.keys(wx.qy || {}).forEach(key => {
     if (needPromiseApis.has(key)) {
       taro.qy[key] = (options, ...args) => {
         options = options || {}
