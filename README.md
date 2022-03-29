@@ -42,6 +42,34 @@ Taro.qy.openUserProfile()
   .then(res => console.log(res))
 ```
 
+## Typings
+
+开发者在 `global.d.ts` 中加入 `/// <reference path="node_modules/@tarojs/plugin-platform-weapp-qy/types/shims-qy.d.ts" />` 即可获得类型提示。
+
+例子：
+
+```
+/// <reference path="node_modules/@tarojs/plugin-platform-weapp-qy/types/shims-qy.d.ts" />
+/// <reference path="node_modules/@tarojs/taro/types/index.d.ts" />
+
+declare module '*.png';
+declare module '*.gif';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.svg';
+declare module '*.css';
+declare module '*.less';
+declare module '*.scss';
+declare module '*.sass';
+declare module '*.styl';
+
+declare namespace NodeJS {
+  interface ProcessEnv {
+    TARO_ENV: 'weapp' | 'swan' | 'alipay' | 'h5' | 'rn' | 'tt' | 'quickapp' | 'qq' | 'jd'
+  }
+}
+```
+
 ## License
 
 MIT License

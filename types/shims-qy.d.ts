@@ -1,25 +1,28 @@
 import Taro from '@tarojs/taro'
 
 declare module '@tarojs/taro' {
-  namespace qy {
-    function canIUse (api: string): boolean
-    function login (options: any): void
-    function checkSession (options: any): void
-    function getEnterpriseUserInfo (options: any): void
-    function getAvatar (options: any): void
-    function getQrCode (options: any): void
-    function selectEnterpriseContact (options: any): void
-    function selectExternalContact (options: any): void
-    function openUserProfile (options: any): void
-    function openEnterpriseChat (options: any): void
-    function getCurExternalContact (options: any): void
-    function shareToExternalContact (options: any): void
-    function getCurExternalChat (options: any): void
-    function sendChatMessage (options: any): void
-    function shareToExternalChat (options: any): void
-    function getContext (options: any): void
-    function getNFCReaderState (options: any): void
-    function startNFCReader (options: any): void
-    function stopNFCReader (options: any): void
+  interface qy {
+    canIUse (api: string): boolean
+    login (options: any): void
+    checkSession (options: any): void
+    getEnterpriseUserInfo (options: any): void
+    getAvatar (options: any): void
+    getQrCode (options: any): void
+    selectEnterpriseContact (options: any): void
+    selectExternalContact (options: any): void
+    openUserProfile (options: any): void
+    openEnterpriseChat (options: any): void
+    getCurExternalContact (options: any): void
+    shareToExternalContact (options: any): void
+    getCurExternalChat (options: any): void
+    sendChatMessage (options: any): void
+    shareToExternalChat (options: any): void
+    getContext (options: any): void
+    getNFCReaderState (options: any): void
+    startNFCReader (options: any): void
+    stopNFCReader (options: any): void
+  }
+  interface TaroStatic {
+    qy: qy
   }
 }

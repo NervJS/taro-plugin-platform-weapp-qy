@@ -3,4 +3,8 @@ node_modules
 .DS_Store
 yarn.lock
 package-lock.json
-types
+types/apis-list.d.ts
+types/apis.d.ts
+types/index.d.ts
+types/program.d.ts
+types/runtime.d.ts
